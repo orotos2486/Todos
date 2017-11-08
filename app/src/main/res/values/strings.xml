@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">IotAndroid</string>
+    <string name="title_activity_list_select">ListSelectActivity</string>
+</resources>
