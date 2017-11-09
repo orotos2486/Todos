@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:layout_weight="0.4"
-            android:text="Time"
+            android:text="Where"
             android:textColor="#393939"
             android:textSize="20dp" />
 
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:layout_weight="0.5"
-            android:text="Where"
+            android:text="Time"
             android:textColor="#393939"
             android:textSize="20dp" />
     </LinearLayout>
@@ -83,10 +83,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="30sp"
             android:text="set"
             android:textSize="15dp"
-            android:onClick="startSetButton"/>
+            android:onClick="startSetButton"
+            />
     </LinearLayout>
 
 </LinearLayout>
