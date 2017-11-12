@@ -28,10 +28,16 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<Todos> items = new ArrayList<Todos>();
+    ArrayList<Todos> todosList = new ArrayList<Todos>();
+    class Todos {
+        String what,where,day,time;
+        Todos(String what, String where, String day , String time) {
+            this.what = what; this.where = where; this.day = day; this.time = time;
+        }
+    }
     class TodosAdapter extends ArrayAdapter {
         public TodosAdapter(Context context) {
-            super(context, R.layout.main_menu_list, items);
+            super(context, R.layout.main_menu_list, todosList);
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -44,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
             TextView timeText = (TextView)view.findViewById(R.id.time);
             TextView dayText = (TextView)view.findViewById(R.id.day);
             TextView whereText = (TextView)view.findViewById(R.id.where);
-            whatText.setText(items.get(position).what);
-            timeText.setText(items.get(position).time);
-            dayText.setText(items.get(position).day);
-            whereText.setText(items.get(position).where);
+            whatText.setText(todosList.get(position).what);
+            timeText.setText(todosList.get(position).time);
+            dayText.setText(todosList.get(position).day);
+            whereText.setText(todosList.get(position).where);
             return view;
         }
     }
@@ -103,13 +109,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     //-----------------DB연동--------------------------------------------------
-    class Todos {
-        String what,where,day,time;
-        Todos(String what, String where, String day , String time) {
-            this.what = what; this.where = where; this.day = day; this.time = time;
-        }
-    }
-    ArrayList<Todos> todosList = new ArrayList<Todos>();
+
     public void readDatabase() {
         Schedules schedules= new Schedules(MainActivity.this);
         SQLiteDatabase db = schedules.getReadableDatabase();

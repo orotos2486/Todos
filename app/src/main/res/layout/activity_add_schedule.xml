@@ -136,6 +136,32 @@
 
         </LinearLayout>
     </LinearLayout>
+    <!--<TextView-->
+        <!--android:id="@+id/testwhat"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="what"-->
+        <!--android:textSize="15dp"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/testwhere"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="where"-->
+        <!--android:textSize="15dp"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/testday"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="day"-->
+        <!--android:textSize="15dp"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/testtime"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="time"-->
+        <!--android:textSize="15dp"/>-->
+
+
 
     <Button
         android:layout_width="wrap_content"

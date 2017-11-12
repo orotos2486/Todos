@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".ScheduleSetActivity" />
         <activity android:name=".AddScheduleActivity" />
-        <activity android:name=".DbTestActivity"></activity>
+        <activity android:name=".DbTestActivity">
+
+        </activity>
     </application>
 
 </manifest>

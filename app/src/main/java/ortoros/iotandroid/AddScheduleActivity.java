@@ -11,12 +11,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class AddScheduleActivity extends AppCompatActivity {
     private String smonth;
     private String sday;
     private String shour;
     private String sminute;
+    private TextView testWhat,testWhere,testDay,testTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,16 +97,26 @@ public class AddScheduleActivity extends AppCompatActivity {
         String stringDay = smonth+"/"+sday;
         String stringTime = shour+":"+sminute;
         writeDatabase(whatText.getText().toString(), whereText.getText().toString(),stringDay,stringTime);
-        finish();
+//        testWhat = (TextView)findViewById(R.id.testwhat);
+//        testWhere = (TextView)findViewById(R.id.testwhere);
+//        testDay = (TextView)findViewById(R.id.testday);
+//        testTime = (TextView)findViewById(R.id.testtime);
+//        testWhat.setText(whatText.getText().toString());
+//        testWhere.setText(whereText.getText().toString());
+//        testDay.setText(stringDay);
+//        testTime.setText(stringTime);
+        Intent intent = new Intent(AddScheduleActivity.this,ScheduleSetActivity.class);
+        startActivity(intent);
+
     }
     public void writeDatabase(String what, String where , String day, String time) {
-        Bookmark bookmark = new Bookmark(AddScheduleActivity.this);
-        SQLiteDatabase db = bookmark.getWritableDatabase();
+        Schedules schedules= new Schedules(AddScheduleActivity.this);
+        SQLiteDatabase db = schedules.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Bookmark.WHAT, what);
-        values.put(Bookmark.WHERE, where);
-        values.put(Bookmark.DAY, day);
-        values.put(Bookmark.TIME,time);
-        db.insert(Bookmark.TABLE_NAME, null, values);
+        values.put(schedules.WHAT, what);
+        values.put(schedules.WHERE, where);
+        values.put(schedules.DAY, day);
+        values.put(schedules.TIME,time);
+        db.insert(schedules.TABLE_NAME, null, values);
     }
 }

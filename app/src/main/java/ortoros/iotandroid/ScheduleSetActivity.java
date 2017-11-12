@@ -18,6 +18,12 @@ import java.util.ArrayList;
 
 public class ScheduleSetActivity extends AppCompatActivity {
     ArrayList<Bookmark> items = new ArrayList<Bookmark>();
+    class Bookmark {
+        String what,where,day,time;
+        Bookmark(String what, String where, String day , String time) {
+            this.what = what; this.where = where; this.day = day; this.time = time;
+        }
+    }
     class TodosAdapter extends ArrayAdapter {
         public TodosAdapter(Context context) {
             super(context, R.layout.main_menu_list, items);
@@ -55,18 +61,18 @@ public class ScheduleSetActivity extends AppCompatActivity {
     }
     public void newSchedule(View view){
         Intent intent = new Intent(ScheduleSetActivity.this,AddScheduleActivity.class);
+        startActivity(intent);
+    }
+    public void goMainActivity(View view){
+        Intent intent = new Intent(ScheduleSetActivity.this,MainActivity.class);
+        startActivity(intent);
     }
     //-----------------DB연동--------------------------------------------------
-    class Bookmark {
-        String what,where,day,time;
-        Bookmark(String what, String where, String day , String time) {
-            this.what = what; this.where = where; this.day = day; this.time = time;
-        }
-    }
+
     public void readDatabase() {
         Schedules schedules = new Schedules(ScheduleSetActivity.this);
         SQLiteDatabase db = schedules.getReadableDatabase();
-        String sql = "select * from " + Schedules.TABLE_NAME;
+        String sql = "select * from "+Schedules.TABLE_NAME;
         Cursor cursor = db.rawQuery(sql, null);
         items.clear();
         for (int i = 0; i < cursor.getCount(); i++) {
@@ -85,9 +91,7 @@ public class ScheduleSetActivity extends AppCompatActivity {
 //        }
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 //                MainActivity.this, android.R.layout.simple_list_item_1, items);
-//                ListView listView = (ListView)findViewById(R.id.list);
-//                listView.setAdapter(adapter);
-        ScheduleSetActivity.TodosAdapter adapter = new ScheduleSetActivity.TodosAdapter(ScheduleSetActivity.this);
+        TodosAdapter adapter = new TodosAdapter(ScheduleSetActivity.this);
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(adapter);
 
