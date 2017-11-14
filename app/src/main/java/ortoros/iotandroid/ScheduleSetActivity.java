@@ -1,32 +1,30 @@
 package ortoros.iotandroid;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class ScheduleSetActivity extends AppCompatActivity {
-    ArrayList<Bookmark> items = new ArrayList<Bookmark>();
-    class Bookmark {
-        String what,where,day,time;
-        Bookmark(String what, String where, String day , String time) {
-            this.what = what; this.where = where; this.day = day; this.time = time;
-        }
-    }
+    ArrayList<Todos> items = new ArrayList<Todos>();
     class TodosAdapter extends ArrayAdapter {
         public TodosAdapter(Context context) {
-            super(context, R.layout.main_menu_list, items);
+            super(context, R.layout.set_menu_list, items);
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -43,6 +41,33 @@ public class ScheduleSetActivity extends AppCompatActivity {
             timeText.setText(items.get(position).time);
             dayText.setText(items.get(position).day);
             whereText.setText(items.get(position).where);
+
+            CheckBox checkBox = (CheckBox)view.findViewById(R.id.check);
+            if (items.get(position).checked) {
+                checkBox.setChecked(true);
+            } else {
+                checkBox.setChecked(false);
+            }
+            final int pos = position;
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    items.get(pos).checked = b;
+                }
+            });
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ScheduleSetActivity.this,AddScheduleActivity.class);
+                    intent.putExtra("what",items.get(pos).what);
+                    intent.putExtra("where",items.get(pos).where);
+                    intent.putExtra("day",items.get(pos).day);
+                    intent.putExtra("time",items.get(pos).time);
+                    intent.putExtra("status","update");
+                    startActivity(intent);
+                }
+            });
             return view;
         }
     }
@@ -61,18 +86,34 @@ public class ScheduleSetActivity extends AppCompatActivity {
     }
     public void newSchedule(View view){
         Intent intent = new Intent(ScheduleSetActivity.this,AddScheduleActivity.class);
+        intent.putExtra("status","new");
         startActivity(intent);
     }
     public void goMainActivity(View view){
+        for(int i = 0;i<items.size();i++){
+            if(items.get(i).checked == true){
+                writeDatabase(items.get(i).what,items.get(i).where,items.get(i).day,items.get(i).time,ScheduleSetActivity.this);
+            }
+        }
+
         Intent intent = new Intent(ScheduleSetActivity.this,MainActivity.class);
         startActivity(intent);
     }
     //-----------------DB연동--------------------------------------------------
-
+    public static void writeDatabase(String what, String where , String day, String time, Context context) {
+        Schedules schedules= new Schedules(context);
+        SQLiteDatabase db = schedules.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(schedules.WHAT, what);
+        values.put(schedules.WHERE, where);
+        values.put(schedules.DAY, day);
+        values.put(schedules.TIME,time);
+        db.insert(schedules.TABLE_NAME, null, values);
+    }
     public void readDatabase() {
-        Schedules schedules = new Schedules(ScheduleSetActivity.this);
+        Expected_Schedules schedules = new Expected_Schedules(ScheduleSetActivity.this);
         SQLiteDatabase db = schedules.getReadableDatabase();
-        String sql = "select * from "+Schedules.TABLE_NAME;
+        String sql = "select * from "+Expected_Schedules.TABLE_NAME;
         Cursor cursor = db.rawQuery(sql, null);
         items.clear();
         for (int i = 0; i < cursor.getCount(); i++) {
@@ -81,27 +122,27 @@ public class ScheduleSetActivity extends AppCompatActivity {
             String where = cursor.getString(1);
             String day = cursor.getString(2);
             String time = cursor.getString(3);
-            items.add(new Bookmark(what, where, day, time));
+            items.add(new Todos(what, where, day, time));
         }
         cursor.close();
-        //-------------------------------------------------
-//        String items[] = new String[todosList.size()];
-//        for (int i = 0; i < todosList.size(); i++) {
-//            items[i] = todosList.get(i).what + todosList.get(i).where ;
-//        }
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//                MainActivity.this, android.R.layout.simple_list_item_1, items);
+
         TodosAdapter adapter = new TodosAdapter(ScheduleSetActivity.this);
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(adapter);
 
         //ItemClickListener
-//                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        Toast.makeText(MainActivity.this, position+"", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(ScheduleSetActivity.this,AddScheduleActivity.class);
+                        intent.putExtra("what",items.get(position).what);
+                        intent.putExtra("where",items.get(position).where);
+                        intent.putExtra("day",items.get(position).day);
+                        intent.putExtra("time",items.get(position).time);
+                        intent.putExtra("status","update");
+                        startActivity(intent);
+                    }
+                });
         //수정을 요함
 //        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 //            @Override

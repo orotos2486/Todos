@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\SPTek\.android\build-cache\9b743a96783ce55b5e597a2cd86e8e3618455a97\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\pre-dexed\debug\classes_4f728c369482ffc7c4fbe60c839fd533dc1cac42.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\SPTek\.android\build-cache\9b743a96783ce55b5e597a2cd86e8e3618455a97\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4f728c369482ffc7c4fbe60c839fd533dc1cac42\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\SPTek\.android\build-cache\1f287a06d78123f58dd4a8e1ac78cd7d8399f552\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_cd34c7403d2f6e6af25b77d1a2f009d6e4b6b060\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\SPTek\AndroidStudioProjects\Todos\app\libs\minewBeaconScan.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c2bdbbb7ee965d29431567f6e8f4c49ac55fa83b">
+        <dex dex="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\pre-dexed\debug\minewBeaconScan_3e07e1625713e7bd870624660c313bf0cb7d6375.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_a4c51f082aec3974595327719190962f60ec842a\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\SPTek\.android\build-cache\1f287a06d78123f58dd4a8e1ac78cd7d8399f552\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\pre-dexed\debug\classes_cd34c7403d2f6e6af25b77d1a2f009d6e4b6b060.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0b0d11a9ccb4c104cd2a56bb58997ccd7ff89b87">
+        <dex dex="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_36247d915f52c907001af665eb821c822a9792eb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\SPTek\AndroidStudioProjects\Todos\app\libs\minewBeaconScan.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c2bdbbb7ee965d29431567f6e8f4c49ac55fa83b">
+        <dex dex="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\transforms\dex\debug\folders\1000\2\minewBeaconScan_3e07e1625713e7bd870624660c313bf0cb7d6375\classes.dex" />
+    </item>
+
+</items>
