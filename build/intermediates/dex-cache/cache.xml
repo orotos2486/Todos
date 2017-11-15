@@ -11,24 +11,6 @@
         <dex dex="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\pre-dexed\debug\classes_4f728c369482ffc7c4fbe60c839fd533dc1cac42.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\SPTek\.android\build-cache\9b743a96783ce55b5e597a2cd86e8e3618455a97\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
-        <dex dex="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4f728c369482ffc7c4fbe60c839fd533dc1cac42\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\SPTek\.android\build-cache\1f287a06d78123f58dd4a8e1ac78cd7d8399f552\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
-        <dex dex="C:\Users\SPTek\AndroidStudioProjects\Todos\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_cd34c7403d2f6e6af25b77d1a2f009d6e4b6b060\classes.dex" />
-    </item>
-    <item
         is-multidex="false"
         jar="C:\Users\SPTek\AndroidStudioProjects\Todos\app\libs\minewBeaconScan.jar"
         jumboMode="false"

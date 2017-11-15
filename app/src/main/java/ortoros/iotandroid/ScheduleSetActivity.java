@@ -2,21 +2,23 @@ package ortoros.iotandroid;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -68,6 +70,26 @@ public class ScheduleSetActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(ScheduleSetActivity.this);
+                    dialog.setMessage("해당 데이터를 삭제하시겠습니까?");
+                    dialog.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            removeDatabase(items.get(pos).what);
+                            readDatabase();
+                        }
+                    });
+                    dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {}
+                    });
+                    dialog.show();
+                    return false;
+                }
+            });
             return view;
         }
     }
@@ -82,6 +104,11 @@ public class ScheduleSetActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));
         //홈버튼 표시
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+
+
         readDatabase();
     }
     public void newSchedule(View view){
@@ -104,6 +131,7 @@ public class ScheduleSetActivity extends AppCompatActivity {
         Schedules schedules= new Schedules(context);
         SQLiteDatabase db = schedules.getWritableDatabase();
         ContentValues values = new ContentValues();
+
         values.put(schedules.WHAT, what);
         values.put(schedules.WHERE, where);
         values.put(schedules.DAY, day);
@@ -122,7 +150,10 @@ public class ScheduleSetActivity extends AppCompatActivity {
             String where = cursor.getString(1);
             String day = cursor.getString(2);
             String time = cursor.getString(3);
-            items.add(new Todos(what, where, day, time));
+            int checked = 0;
+            boolean real_checked =false;
+            if (checked == 1) real_checked = true;
+            items.add(new Todos(what,where,day,time,real_checked));
         }
         cursor.close();
 
@@ -130,38 +161,13 @@ public class ScheduleSetActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(adapter);
 
-        //ItemClickListener
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(ScheduleSetActivity.this,AddScheduleActivity.class);
-                        intent.putExtra("what",items.get(position).what);
-                        intent.putExtra("where",items.get(position).where);
-                        intent.putExtra("day",items.get(position).day);
-                        intent.putExtra("time",items.get(position).time);
-                        intent.putExtra("status","update");
-                        startActivity(intent);
-                    }
-                });
-        //수정을 요함
-//        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                final int pos = position;//!!!!!!!!!
-//                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-//                dialog.setMessage("해당 데이터를 삭제하시겠습니까?");
-//                dialog.setPositiveButton("예", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                }
-//            });
-//                dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {}
-//                });
-//                dialog.show();
-//                return true;
-//            }
-//        });
+    }
+    public void removeDatabase(String what) {
+        Expected_Schedules bookmark = new Expected_Schedules(ScheduleSetActivity.this);
+        SQLiteDatabase db = bookmark.getWritableDatabase();
+        Toast.makeText(ScheduleSetActivity.this,what, Toast.LENGTH_LONG).show();
+        String[] args = {what+""};
+//        db.delete(Bookmark.TABLE_NAME, "WHAT = ? ", args);
+        db.execSQL("DELETE FROM "+Expected_Schedules.TABLE_NAME+" WHERE WHAT=\'"+what+"\'");
     }
 }

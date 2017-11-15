@@ -7,8 +7,8 @@ package ortoros.iotandroid;
 public class Todos {
     String what,where,day,time;
     boolean checked;
-    Todos(String what, String where, String day , String time) {
+    Todos(String what, String where, String day , String time, boolean checked) {
         this.what = what; this.where = where; this.day = day; this.time = time;
-        this.checked = false;
+        this.checked = checked;
     }
 }

@@ -11,13 +11,14 @@ public class Schedules extends SQLiteOpenHelper{
     public static final String WHERE = "loc";
     public static final String TIME = "time";
     public static final String DAY = "day";
+    public static final String CHECK = "checked";
     public Schedules(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "create table " + TABLE_NAME + "(" + WHAT +" text PRIMARY KEY,"
-                +WHERE +" text,"+ TIME +" text," + DAY + " text)";
+                +WHERE +" text,"+ TIME +" text," + DAY + " text," + CHECK + " INTEGER)";
         try{
             db.execSQL(sql);
         }catch(Exception e){e.printStackTrace();}
